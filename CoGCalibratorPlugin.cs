@@ -688,6 +688,24 @@ namespace MissionPlanner.CoGCalibrator
             _progressBar.Value = 0;
             _lblStatus.Text = "Hold the drone completely still...";
 
+            // Request RAW_IMU message at 50Hz (20,000 microseconds)
+            try
+            {
+                MainV2.comPort.doCommand(
+                    (byte)MainV2.comPort.sysidcurrent,
+                    (byte)MainV2.comPort.compidcurrent,
+                    (MAVLink.MAV_CMD)511, // MAV_CMD_SET_MESSAGE_INTERVAL
+                    27f,                  // MAVLINK_MSG_ID_RAW_IMU (27)
+                    20000f,               // Interval in microseconds (50Hz)
+                    0f, 0f, 0f, 0f, 0f,
+                    false
+                );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("CoG Estimator: Failed to request RAW_IMU rate: " + ex.Message);
+            }
+
             lock (_lockObj)
             {
                 _sampleSumX = 0;
@@ -709,6 +727,21 @@ namespace MissionPlanner.CoGCalibrator
             _isSampling = false;
             _samplingTimer.Stop();
             _uiUpdateTimer.Stop();
+
+            // Restore RAW_IMU message stream interval to default/disabled
+            try
+            {
+                MainV2.comPort.doCommand(
+                    (byte)MainV2.comPort.sysidcurrent,
+                    (byte)MainV2.comPort.compidcurrent,
+                    (MAVLink.MAV_CMD)511, // MAV_CMD_SET_MESSAGE_INTERVAL
+                    27f,                  // MAVLINK_MSG_ID_RAW_IMU (27)
+                    -1f,                  // -1 = disable, 0 = reset to default stream rate
+                    0f, 0f, 0f, 0f, 0f,
+                    false
+                );
+            }
+            catch { }
 
             _btnMeasure.Enabled = true;
             _numX.Enabled = true;
