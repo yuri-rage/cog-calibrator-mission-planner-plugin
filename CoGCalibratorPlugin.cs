@@ -320,7 +320,7 @@ namespace MissionPlanner.CoGCalibrator
 
             // 3. List Group (Top-Right)
             _listGroup = new GroupBox();
-            _listGroup.Text = "2. Recorded Hang Points & Gravity Vectors";
+            _listGroup.Text = "2. Measurement Results";
             _listGroup.Dock = DockStyle.Fill;
             _listGroup.ForeColor = Color.White;
             _listGroup.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
@@ -400,7 +400,7 @@ namespace MissionPlanner.CoGCalibrator
 
             // 4. Results Group (Bottom - spans both columns)
             _resultsGroup = new GroupBox();
-            _resultsGroup.Text = "3. Calibration Results & Parameter Sync";
+            _resultsGroup.Text = "3. Calibration Results";
             _resultsGroup.Dock = DockStyle.Fill;
             _resultsGroup.ForeColor = Color.White;
             _resultsGroup.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
