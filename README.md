@@ -2,12 +2,15 @@
 
 Estimates a vehicle's Center of Gravity (CoG) and [sensor position offsets (`INS_POS` parameters)](https://ardupilot.org/copter/docs/common-sensor-offset-compensation.html) using a 3D virtual plumb bob method.
 
+![CoG Estimator Interface](screenshot.png)
+
 ## Method & Credits
 
 This plugin utilizes an extension of the **Virtual Plumb Bob** method to estimate the intersection point of multiple suspension lines in 3D space. 
 
 Credit for the original concept:
 *   [Center-of-Gravity-PASCO-acceleromter-Matlab](https://github.com/johnwhear/Center-of-Gravity-PASCO-acceleromter-Matlab) by John Whear.
+*   ArduPilot forum topic: [Novel Method to Find Center of Mass Using Accelerometer](https://discuss.ardupilot.org/t/novel-method-to-find-center-of-mass-using-accelerometer/144160/)
 
 ## Installation
 
